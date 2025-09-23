@@ -67,7 +67,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             contentDescription = "Img Principal",
             contentScale = ContentScale.FillBounds,
             //modifier = Modifier.height(300.dp),
-            modifier = Modifier.height(300.dp),
+            modifier = Modifier.height(250.dp),
 
             )
 
