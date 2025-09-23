@@ -76,7 +76,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             Column(
                horizontalAlignment = Alignment.CenterHorizontally,
                // modifier = Modifier.width(250.dp),
-                modifier = Modifier.width(200.dp),
+                modifier = Modifier.width(200.dp).height(250.dp),
             ) {
                 Text(
                     text = stringResource(R.string.saludo),
