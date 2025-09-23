@@ -22,6 +22,8 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -30,6 +32,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.res.painterResource
@@ -39,6 +44,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.juegoclicker.ui.theme.JuegoClickerTheme
 
 import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
@@ -63,7 +69,7 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
     val img1 = painterResource(R.drawable.principal);
-
+    var puntos: Int = 0;
     Surface(
         color = MaterialTheme.colorScheme.background,
     ) {
@@ -72,8 +78,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             painter = img1,
             contentDescription = "Img Principal",
             contentScale = ContentScale.FillBounds,
-            //modifier = Modifier.height(300.dp),
-            modifier = Modifier.height(250.dp),
+
+            modifier = Modifier.fillMaxHeight().fillMaxWidth(),
 
             )
 
@@ -81,36 +87,46 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
             // Contenido encima de la imagen
             Column(
                horizontalAlignment = Alignment.CenterHorizontally,
-               // modifier = Modifier.width(250.dp),
-                modifier = Modifier.width(200.dp).height(250.dp),
+               modifier = Modifier.fillMaxHeight(),
             ) {
                 Text(
-                    text = stringResource(R.string.saludo),
+                    text = stringResource(R.string.title),
                     color = colorResource(id = R.color.miColor),
 
                     modifier = Modifier
-                        .fillMaxWidth(0.5f)
+                        .fillMaxWidth(0.55f)
                         .align(Alignment.End)
-                        .padding(0.dp),
+                        .padding(top = 35.dp, end = 5.dp),
 
+
+                    lineHeight = 50.sp,
+                    fontSize = 50.sp,
                     textAlign = TextAlign.Center,
+
+                    style = TextStyle(
+                        shadow = Shadow(
+                            color = Color.Blue,
+                            offset = Offset(4f, 4f),
+                            blurRadius = 6f,
+                        )
+                    )
                 )
-                Spacer(
-                    modifier = Modifier.weight(0.3f)
-                )
+
+                // Esta interesante pero me hecha el Row hasta abajo del todo:
+               // Spacer( modifier = Modifier.weight(0.5f) )
+
                 Row (
                     verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.fillMaxWidth(),
                     horizontalArrangement = Arrangement.Center,
                 ){
                     Button(
-                        onClick = {},
-                        modifier = Modifier.height(18.dp),
-                        contentPadding = PaddingValues(horizontal = 12.dp),
+                        onClick = {puntos++},
+                        modifier = Modifier.padding(top = 600.dp),
                     ) {
                         Text(
                             text = stringResource(R.string.btnStart),
-                            fontSize = 8.sp,
+                            fontSize = 35.sp,
 
                         )
                     } // END Button
@@ -118,9 +134,9 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 } // END Row
                 Text(
                     color = colorResource(R.color.miColor),
-                    text = "Los puntos que estas obteniendo son: ", // RECUERDA - Tengo que poner variable del contador
-                    fontSize = 6.sp,
-                    modifier = Modifier.align(Alignment.Start).padding(2.dp),
+                    text = "Los puntos que estas obteniendo son: $puntos", // RECUERDA $puntos- Tengo que poner variable del contador
+                    fontSize = 18.sp,
+                    modifier = Modifier.align(Alignment.Start).padding(top = 18.dp, start = 15.dp),
                 )
             }
 
