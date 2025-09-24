@@ -19,6 +19,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.internal.rememberComposableLambdaN
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -56,16 +57,54 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-    val img1 = painterResource(R.drawable.principal);
-    var punto  by remember { mutableStateOf(0) }
+
+    var estado by remember { mutableStateOf(1) };
+    var contador by remember { mutableStateOf(0) }
+
+    val imgId = when (estado) {
+        1 -> R.drawable.principal;
+        2 -> R.drawable.boulder3;
+        3 -> R.drawable.everest;
+        4 -> R.drawable.tienda;
+        5 -> R.drawable.desplome;
+        else -> R.drawable.principal;
+    }
+
+    ArrancarApp(
+        imgId = imgId,
+        onBotonClick = {
+            val nuevoEstado = (1..5).random();
+            estado = nuevoEstado;
+
+            if(estado == 4){
+                contador++
+            }
+        },
+        estado = estado,
+        contar = contador
+
+    )
+}
+
+@Composable
+fun ArrancarApp(
+    imgId: Int,
+    onBotonClick: () -> Unit,
+    estado: Int,
+    contar: Int,
+
+){
+    var img = painterResource(imgId);
+
     Surface(
         color = MaterialTheme.colorScheme.background,
     ) {
         // Imagen de fondo
         Image(
-            painter = img1,
+            painter = img,
             contentDescription = "Img Principal",
             contentScale = ContentScale.FillBounds,
 
@@ -80,7 +119,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                modifier = Modifier.fillMaxHeight(),
             ) {
                 Text(
-                    text = stringResource(R.string.title),
+                    text = stringResource(R.string.title1),
                     color = colorResource(id = R.color.miColor),
 
                     modifier = Modifier
@@ -111,7 +150,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                     horizontalArrangement = Arrangement.Center,
                 ){
                     Button(
-                        onClick = { punto++ },
+                        onClick = onBotonClick,
                         modifier = Modifier.padding(top = 600.dp),
                     ) {
                         Text(
@@ -124,7 +163,7 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 } // END Row
                 Text(
                     color = colorResource(R.color.miColor),
-                    text = "Los puntos que estas obteniendo son: $punto", // RECUERDA $puntos- Tengo que poner variable del contador
+                    text = "Juego número: $estado | Llevas acumulado: $contar", // RECUERDA contar - Tengo que poner variable del contador
                     fontSize = 18.sp,
                     modifier = Modifier.align(Alignment.Start).padding(top = 18.dp, start = 15.dp),
                 )
@@ -140,4 +179,5 @@ fun GreetingPreview() {
     JuegoClickerTheme {
         Greeting("Android")
     }
+
 }

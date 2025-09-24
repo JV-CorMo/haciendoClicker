@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">JuegoClicker</string>
     <string name="saludo">Hola bienvenido</string>
-    <string name="title">Juegas a Clicker</string>
+    <string name="title1">Juegas a Clicker</string>
     <string name="btnStart">Jugar</string>
 
 </resources>
