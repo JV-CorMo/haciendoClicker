@@ -68,15 +68,14 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 
     val (imgId, titulo) = when (estado) {
         1 -> Pair(R.drawable.principal, stringResource(R.string.title1));
-        2 -> Pair(R.drawable.boulder3,stringResource(R.string.title2 ));
+        2 -> Pair(R.drawable.bulder,stringResource(R.string.title2 ));
         3 -> Pair(R.drawable.everest, stringResource(R.string.title5));
         4 -> Pair(R.drawable.tienda, stringResource(R.string.title4));
         5 -> Pair(R.drawable.desplome, stringResource(R.string.title3));
         else -> Pair(R.drawable.principal, stringResource(R.string.title1));
     }
 
-
-
+    // Cambiar "Contraste" texto presentación puntos.
 
     ArrancarApp(
         imgId = imgId,
@@ -112,10 +111,10 @@ fun ArrancarApp(
         Image(
             painter = img,
             contentDescription = "Img Principal",
-            contentScale = ContentScale.FillBounds,
+            contentScale = ContentScale.Crop,
 
-            modifier = Modifier.fillMaxHeight().fillMaxWidth(),
-
+            //modifier = Modifier.fillMaxHeight().fillMaxWidth(),
+            modifier = Modifier.fillMaxSize(),
             )
 
 
@@ -129,14 +128,14 @@ fun ArrancarApp(
                     color = colorResource(id = R.color.miColor),
 
                     modifier = Modifier
-                        .fillMaxWidth(0.55f)
+                        .fillMaxWidth(0.65f)
                         .align(Alignment.End)
-                        .padding(top = 35.dp, end = 5.dp),
+                        .padding(top = 35.dp, end = 10.dp),
 
 
                     lineHeight = 50.sp,
                     fontSize = 50.sp,
-                    textAlign = TextAlign.Center,
+                    textAlign = TextAlign.Right,
 
                     style = TextStyle(
                         shadow = Shadow(
@@ -168,10 +167,13 @@ fun ArrancarApp(
 
                 } // END Row
                 Text(
+                    // Falta cambiar el color del texto respecto a imagen/por contrastes.
                     color = colorResource(R.color.miColor),
-                    text = "Juego número: $estado | Llevas acumulado: $contar", // RECUERDA contar - Tengo que poner variable del contador
+                    text = "Pntalla número: $estado | Imagenes repetidas: $contar", 
                     fontSize = 18.sp,
-                    modifier = Modifier.align(Alignment.Start).padding(top = 18.dp, start = 15.dp),
+                    modifier = Modifier
+                        .align(Alignment.Start)
+                        .padding(top = 18.dp, start = 15.dp),
                 )
             }
 
