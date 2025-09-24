@@ -2,6 +2,11 @@
     <string name="app_name">JuegoClicker</string>
     <string name="saludo">Hola bienvenido</string>
     <string name="title1">Juegas a Clicker</string>
+    <string name="title2">Estas haciendo bulder</string>
+    <string name="title3">Escalando desplomes que fuerte</string>
+    <string name="title4">Uhh! A dormir</string>
+    <string name="title5">En la cima del Everest</string>
+
     <string name="btnStart">Jugar</string>
 
 </resources>

@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
@@ -64,17 +65,24 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
     var estado by remember { mutableStateOf(1) };
     var contador by remember { mutableStateOf(0) }
 
-    val imgId = when (estado) {
-        1 -> R.drawable.principal;
-        2 -> R.drawable.boulder3;
-        3 -> R.drawable.everest;
-        4 -> R.drawable.tienda;
-        5 -> R.drawable.desplome;
-        else -> R.drawable.principal;
+
+    val (imgId, titulo) = when (estado) {
+        1 -> Pair(R.drawable.principal, stringResource(R.string.title1));
+        2 -> Pair(R.drawable.boulder3,stringResource(R.string.title2 ));
+        3 -> Pair(R.drawable.everest, stringResource(R.string.title5));
+        4 -> Pair(R.drawable.tienda, stringResource(R.string.title4));
+        5 -> Pair(R.drawable.desplome, stringResource(R.string.title3));
+        else -> Pair(R.drawable.principal, stringResource(R.string.title1));
     }
+
+
+
 
     ArrancarApp(
         imgId = imgId,
+        titulo = titulo,
+        estado = estado,
+        contar = contador,
         onBotonClick = {
             val nuevoEstado = (1..5).random();
             estado = nuevoEstado;
@@ -83,8 +91,6 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
                 contador++
             }
         },
-        estado = estado,
-        contar = contador
 
     )
 }
@@ -95,7 +101,7 @@ fun ArrancarApp(
     onBotonClick: () -> Unit,
     estado: Int,
     contar: Int,
-
+    titulo: String,
 ){
     var img = painterResource(imgId);
 
@@ -119,7 +125,7 @@ fun ArrancarApp(
                modifier = Modifier.fillMaxHeight(),
             ) {
                 Text(
-                    text = stringResource(R.string.title1),
+                    text = titulo,
                     color = colorResource(id = R.color.miColor),
 
                     modifier = Modifier
